@@ -5,9 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css">
-    <title>Document</title>
+    <title>JS Quiz</title>
 </head>
 <body>
-    
+    <header>
+        <h1>JavaScript Quiz</h1> <!-- Center this accross the top -->
+        <h3><a href = #>View Highscores</a></h3> <!-- top left corner -->
+        <h3 class="timer"></h3> <!-- top right corner -->
+    </header>
+    <main>
+        <p class="question">
+            Welcome! This quiz is intened to test your base knowledge of JavaScript.<br>
+            When you press the strat button below, you will be asked a series of questions pretaining to JavaScript.<br>
+            As you progress the timer in the top right will begin to count down. Once you make it to the end, you can enter your name/initials to save your highscore. But be careful. <br> 
+            Each wrong answer decreases the time by 10 seconds, and if the timer reaches 0 before you are done, it will be game over! <br><br>
+            Have fun and good luck!
+        </p>
+        <h4 class="start-button">START</h4>
+        <ul class="answers">
+        </ul>
+    </main>
+    <script src="./assets/script.js"></script>
 </body>
 </html>
