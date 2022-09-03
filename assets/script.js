@@ -26,6 +26,45 @@ var timerEl = document.querySelector('.timer')
 var startButton = document.querySelector('.start-button')
 var answerStatus = document.querySelector('.answer-notification')
 
+//Questions array
+var questions = 
+    [
+        {
+        question: "What is not a JavaScript data type?",
+        choices: ["Number", "Boolean", "Phrase", "String"],
+        answer: 2
+        },
+        
+        {
+        question: "Which of the following options is used to identify stricktly equal?",
+        choices: ["===", "==", "=s=", "!=="],
+        answer: 0
+        },
+
+        {
+        question: "What tag would you use to link your JavaScript document to your HTML?",
+        choices: ["<link>", "<body>", "<html>", "<script>"],
+        answer: 3 
+        },
+        
+        {
+        question: "Which of the following are popup uptions in JavaScript",
+        choices: ["Prompt", "Alert", "Confirm", "All of the above"],
+        answer: 3 
+        },
+
+        {
+        question: "Which of the following is the proper syntax to call a function named: function?",
+        choices: ["function.call", "function()", "function[]", "All of the above are ways to call a function"],
+        answer: 1 
+        },
+
+        {
+        question: "What is the prefered case in JavaScript called?",
+        choices: ["Camel case", "Brief case", "Sentence case", "Upper case"],
+        answer: 0 
+        },
+    ];
 
 //Function that creates answer options
 function createAnswer(answer) {
@@ -36,8 +75,7 @@ function createAnswer(answer) {
 
 //Opening of the page
 function init() {
-    //answerList.appendChild(createAnswer('START')); – Adding in a button to take this one's place
-    timerCount = 60; //NEED TO LINK THIS TO A TIMER. CURRENTLY NOT SHOWING UP
+    timerCount = 60; 
     timerEl.textContent = timerCount + ' seconds left'
     startButton.addEventListener('click', startQuiz)
 }
@@ -54,6 +92,8 @@ function startTimer () {
       }
     }, 1000);
 }
+
+
 
 //Question function psuedo code
   /*function question1() {
