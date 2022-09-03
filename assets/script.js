@@ -78,26 +78,34 @@ function startTimer () {
 function startQuiz() {
     startButton.textContent = '' //removes start button
     startTimer() //starts timer function
-    question1()
+    question1() //triigers question 1
 
     function question1() {
         questionEl.textContent = 'I am a test question. Please hit "correct" for the correct answer and "incorrect" for the incorrect answer.'
         answerList.appendChild(createAnswer('Correct'));
         answerList.appendChild(createAnswer('Incorrect'));
-        answerList.addEventListener('click', function(event) {var element = event.target})//WORKING ON THIS SO THAT THE BULLET WILL TRIGER THE EVENTS BELOW> SEE UNIT 4.19 FOR POSSIBLE HELP
-        if ('click' === 'correct' && timerCount > 0) {
-            answerStatus.textContent = 'You got the last question right!'
-            question2()
-            //Need to add in a score++ element
-         } else if ('click' !== 'correct' && timerCount > 0) {
-             timerCount -= 10
-             answerStatus.textContent = 'You got the last question wrong.'
-             question2()
-         } else {
-            alert('you ran out of time :(') //this is a placeholder untill i get the score form up.
-         }
+        answerList.addEventListener('click', function(event) {
+            var element = event.target
+            if (element.matches("Correct") && timerCount > 0) {
+                answerStatus.textContent = 'You got the last question right!'
+                question2()
+            } else if (element.matches(!"Correct") && timerCount > 0) {
+                timerCount -= 10
+                answerStatus.textContent = 'You got the last question wrong.'
+                question2()
+            } else if (timCount = 0) {
+                alert('you ran out of time :(') //this is a placeholder untill i get the score form up.
+            }
+        })
+    } 
+
+    function question2() {
+        questionEl.textContent = 'You made it to question 2!'
+        answerList.appendChild(createAnswer('Not this again...'));
+        answerList.appendChild(createAnswer('Yippee! What is question 3?'));
     }
 
+/* COMMENTING OUT ADDITIONAL QUESTIONS FOR NOW TILL I GET THE EVENT LISTENER WORKING ABOVE
     function question2() {
         questionEl.textContent = 'You made it to question 2!'
         answerList.appendChild(createAnswer('Not this again...'));
@@ -137,6 +145,6 @@ function startQuiz() {
         questionEl.textContent = 'Thank you for finishing the quiz! If you would like to save your score please type in your name below. You can find your scores by clicking "View Highscores" above.'
 
         //FORM GOES HERE
-    }
+    } */
 }
 
