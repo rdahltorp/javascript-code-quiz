@@ -24,6 +24,7 @@ var questionEl = document.querySelector('.question');
 var answerList = document.querySelector('.answers');
 var timerEl = document.querySelector('.timer')
 var startButton = document.querySelector('.start-button')
+var answerStatus = document.querySelector('.answer-notification')
 
 
 //Function that creates answer options
@@ -54,7 +55,7 @@ function startTimer () {
     }, 1000);
 }
 
-//Question function
+//Question function psuedo code
   /*function question1() {
    Goals here: 
   - change .question to be a new question
@@ -81,17 +82,61 @@ function startQuiz() {
 
     function question1() {
         questionEl.textContent = 'I am a test question. Please hit "correct" for the correct answer and "incorrect" for the incorrect answer.'
-        createAnswer('Correct')
         answerList.appendChild(createAnswer('Correct'));
         answerList.appendChild(createAnswer('Incorrect'));
-        answerList.addEventListener('click') //THIS IS PROBABLY WRONG, BUT GETTING THIS DOWN NOW TO TRY AND UNDERSTAND WHAT NEEDS TO HAPPEN
-        if ('click' === 'correct') {
-            alert('You did it!')
-         } else {
+        answerList.addEventListener('click', function(event) {var element = event.target})//WORKING ON THIS SO THAT THE BULLET WILL TRIGER THE EVENTS BELOW> SEE UNIT 4.19 FOR POSSIBLE HELP
+        if ('click' === 'correct' && timerCount > 0) {
+            answerStatus.textContent = 'You got the last question right!'
+            question2()
+            //Need to add in a score++ element
+         } else if ('click' !== 'correct' && timerCount > 0) {
              timerCount -= 10
+             answerStatus.textContent = 'You got the last question wrong.'
+             question2()
+         } else {
+            alert('you ran out of time :(') //this is a placeholder untill i get the score form up.
          }
     }
 
-    //function question2() {}
+    function question2() {
+        questionEl.textContent = 'You made it to question 2!'
+        answerList.appendChild(createAnswer('Not this again...'));
+        answerList.appendChild(createAnswer('Yippee! What is question 3?'));
+        answerList.addEventListener('click') //THIS IS PROBABLY WRONG, BUT GETTING THIS DOWN NOW TO TRY AND UNDERSTAND WHAT NEEDS TO HAPPEN
+        if ('click' === 'Yippee! What is question 3?' && timerCount > 0) {
+            answerStatus.textContent = 'You got the last question right!'
+            question3()
+         } else if ('click' !== 'Not this again...' && timerCount > 0) {
+             timerCount -= 10
+             answerStatus.textContent = 'You got the last question wrong.'
+             question3()
+         } else {
+            alert('you ran out of time :(') //this is a placeholder untill i get the score form up.
+         }
+    }
+
+    function question3() {
+        questionEl.textContent = 'It is another question!'
+        answerList.appendChild(createAnswer('*sigh*'));
+        answerList.appendChild(createAnswer('This is my jam'));
+        answerList.addEventListener('click')//THIS IS PROBABLY WRONG, BUT GETTING THIS DOWN NOW TO TRY AND UNDERSTAND WHAT NEEDS TO HAPPEN
+
+        if ('click' === 'This is my jam' && timerCount > 0) {
+            answerStatus.textContent = 'You got the last question right!'
+            quizComplete()
+         } else if ('click' !== '*sigh*' && timerCount > 0) {
+             timerCount -= 10
+             answerStatus.textContent = 'You got the last question wrong.'
+             quizComplete()
+         } else {
+            alert('you ran out of time :(') //this is a placeholder untill i get the score form up.
+         }
+    }
+
+    function quizComplete() {
+        questionEl.textContent = 'Thank you for finishing the quiz! If you would like to save your score please type in your name below. You can find your scores by clicking "View Highscores" above.'
+
+        //FORM GOES HERE
+    }
 }
 
