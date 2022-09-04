@@ -53,37 +53,37 @@ var questionsArray =
         {
         question: "What is not a JavaScript data type?",
         choices: ["Number", "Boolean", "Phrase", "String"],
-        answer: 2
+        answer: "Phrase"
         },
         
         {
         question: "Which of the following options is used to identify stricktly equal?",
         choices: ["===", "==", "=s=", "!=="],
-        answer: 0
+        answer: "==="
         },
 
         {
         question: "What tag would you use to link your JavaScript document to your HTML?",
         choices: ["<link>", "<body>", "<html>", "<script>"],
-        answer: 3 
+        answer: "<script>" 
         },
         
         {
-        question: "Which of the following are popup uptions in JavaScript",
+        question: "Which of the following are popup options in JavaScript",
         choices: ["Prompt", "Alert", "Confirm", "All of the above"],
-        answer: 3 
+        answer: "All of the above" 
         },
 
         {
         question: "Which of the following is the proper syntax to call a function named: function?",
         choices: ["function.call", "function()", "function[]", "All of the above are ways to call a function"],
-        answer: 1 
+        answer: "function()"
         },
 
         {
         question: "What is the prefered case in JavaScript called?",
         choices: ["Camel case", "Brief case", "Sentence case", "Upper case"],
-        answer: 0 
+        answer: "Camel case"
         },
     ];
 
@@ -116,25 +116,41 @@ function startQuiz() {
     quizQs(questionsArray) //Causes the quiz questions and answer options to populate
 
     function quizQs() {
-        for (var i = 0; i > questionsArray.length; i++ ) {
-            //This sets what the question will be and renders the copy
-            var question = questionsArray[i].question
-            questionEl.textContent = question
-
-            //This sets up the answers
-            var choices = questionsArray[i].choices
-            for (var options in choices) {
-                let newChoice = document.createElement('li')
-                newChoice.textContent = options
-                answerList.appendChild(newChoice)
-            }
-
-
-
-
+        //This sets what the question will be and renders the copy
+        var question = questionsArray[0].question
+        questionEl.textContent = question
+        //THE WAY THE BCS TOLD ME
+        //This sets up the answers
+        var choices = questionsArray[0].choices
+        for (var options in choices) {
+            let newChoice = document.createElement('li')
+            newChoice.textContent = choices[options]
+            answerList.appendChild(newChoice)
+            newChoice.addEventListener('click', (compare))
         }
     }
+//LEFT OFF BELOW. NEED TO FIGURE OUT HOW TO MAKE THIS THING RECOGNIZE THE CHOICE OPTIONS AND SET IT UP SO THAT WHEN ONE IS CLICKED IT RECOGNIZES IT AS WHAT THE ANSWER IS. 
+    function compare(event) {
+        var element = event.target
+        if (element.matches("li") === questionsArray[0].answer && timerCount > 0){
+            console.log("you got it right")
+            //The stuff I want it to do if correct
+            ////Transition to next question and answer set
+            ////Add text to "answe-notification" section saying: "You got the last question right!"
+            ////Score++ (need to add in a score variable)
 
+        } else if (element.matches("li") !== questionsArray[0].answer && timerCount > 0) {
+            console.log("you got it wrong")
+            timerCount -= 10
+            //The stuff I want it to do if incorrect
+            ////Transition to next question and answer set
+            ////Add text to "answe-notification" section saying: "You got the last question wrong."
+        } else if (timerCount == 0) {
+            console.log("time expired") //Not working
+            //The stuff I want it to do if time expires
+            ////Trigger end game screen (still needs to be built)
+        }
+    }
 
 }
 
