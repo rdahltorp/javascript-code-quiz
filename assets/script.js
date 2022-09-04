@@ -111,42 +111,50 @@ function startTimer () {
 //Quiz function that will start whrn start button is clicked
 function startQuiz() {
     questionEl.textContent ='' //Removes welcome copy
-    startButton.textContent = '' //Removes start button
+    startButton.remove() //Removes start button
     startTimer() //Starts timer function
     quizQs(questionsArray) //Causes the quiz questions and answer options to populate
+    
 
     function quizQs() {
         //This sets what the question will be and renders the copy
         var question = questionsArray[0].question
         questionEl.textContent = question
-        //THE WAY THE BCS TOLD ME
+
         //This sets up the answers
         var choices = questionsArray[0].choices
         for (var options in choices) {
+            //Sets up a new li for each of the "options" in the choices section of the questionArray
             let newChoice = document.createElement('li')
+
+            //Publishes each option as text in the li, gives it a value and appends the child to the ul
             newChoice.textContent = choices[options]
             answerList.appendChild(newChoice)
-            newChoice.addEventListener('click', (compare))
+            newChoice.setAttribute('value', newChoice)
+
+            //Should trigger the function below to compare the value of the newChoice.
+            newChoice.addEventListener('click', compare)
         }
     }
-//LEFT OFF BELOW. NEED TO FIGURE OUT HOW TO MAKE THIS THING RECOGNIZE THE CHOICE OPTIONS AND SET IT UP SO THAT WHEN ONE IS CLICKED IT RECOGNIZES IT AS WHAT THE ANSWER IS. 
+
+//LEFT OFF BELOW.  FOR SOME REASON IT JUST RECOGNIZES EVERYTHING AS THE WRONG ANSWER AND IGNORS THE LAST "IF ELSE"
     function compare(event) {
         var element = event.target
-        if (element.matches("li") === questionsArray[0].answer && timerCount > 0){
+        if (element.matches('value') === questionsArray[0].answer && timerCount > 0){
             console.log("you got it right")
             //The stuff I want it to do if correct
             ////Transition to next question and answer set
             ////Add text to "answe-notification" section saying: "You got the last question right!"
             ////Score++ (need to add in a score variable)
 
-        } else if (element.matches("li") !== questionsArray[0].answer && timerCount > 0) {
+        } else if (element.matches('value') !== questionsArray[0].answer && timerCount > 0) {
             console.log("you got it wrong")
             timerCount -= 10
             //The stuff I want it to do if incorrect
             ////Transition to next question and answer set
             ////Add text to "answe-notification" section saying: "You got the last question wrong."
         } else if (timerCount == 0) {
-            console.log("time expired") //Not working
+            console.log("time expired") //Not working unless something is clicked
             //The stuff I want it to do if time expires
             ////Trigger end game screen (still needs to be built)
         }

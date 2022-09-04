@@ -1,7 +1,52 @@
-/* li {
-    text-decoration: none;
+
+/* Heading section */
+header {
+    background-color: black;
     color: white;
-    background-color: blue;
+    padding: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#scores-timers {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.highscores {
+    text-align: right;
+    display: inline;
+}
+
+.timer {
+    text-align: left;
+    display: inline;
+}
+
+/* Main section */
+
+main {
+    border: solid 3px blue;
+    margin: 20px;
+    padding: 10px;
+
+}
+
+.start-button {
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    margin: 10px 200px;
+}
+
+/* commenting out for now
+
+li {
+    text-decoration: none;
+    background-color: black;
+    color: white;
     padding: 5px;
-    margin: 3px;
-}  */
+} */
