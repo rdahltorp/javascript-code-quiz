@@ -108,7 +108,35 @@ function startTimer () {
     }, 1000);
 }
 
+//Quiz function that will start whrn start button is clicked
+function startQuiz() {
+    questionEl.textContent ='' //Removes welcome copy
+    startButton.textContent = '' //Removes start button
+    startTimer() //Starts timer function
+    quizQs(questionsArray) //Causes the quiz questions and answer options to populate
 
+    function quizQs() {
+        for (var i = 0; i > questionsArray.length; i++ ) {
+            //This sets what the question will be and renders the copy
+            var question = questionsArray[i].question
+            questionEl.textContent = question
+
+            //This sets up the answers
+            var choices = questionsArray[i].choices
+            for (var options in choices) {
+                let newChoice = document.createElement('li')
+                newChoice.textContent = options
+                answerList.appendChild(newChoice)
+            }
+
+
+
+
+        }
+    }
+
+
+}
 
 
 
