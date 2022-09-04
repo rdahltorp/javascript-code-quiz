@@ -18,6 +18,27 @@ Have fun and good luck! </p>
 - User proceeds to answer all questions
 */
 
+//Question function psuedo code
+  /*function question1() {
+   Goals here: 
+  - change .question to be a new question
+  - create 4 answers 
+  - if else statement that:
+  --- if (click === right answer) {
+    fire question 2 function;
+    create prompt that reads "last question: correct!";
+  } else if (click !== correct) {
+    fire question 2 function;
+    create prompt that reads "last question: correct!";
+    deduct 10 seconds from timer
+  } else if (timer === 0) {
+    Trigger end game 
+    message = timer expired
+  }
+
+}  */
+
+
 //Global Vars
 var timerCount;
 var questionEl = document.querySelector('.question');
@@ -27,7 +48,7 @@ var startButton = document.querySelector('.start-button')
 var answerStatus = document.querySelector('.answer-notification')
 
 //Questions array
-var questions = 
+var questionsArray = 
     [
         {
         question: "What is not a JavaScript data type?",
@@ -66,12 +87,6 @@ var questions =
         },
     ];
 
-//Function that creates answer options
-function createAnswer(answer) {
-    var li = document.createElement('li');
-    li.textContent = answer;
-    return li;
-}
 
 //Opening of the page
 function init() {
@@ -95,96 +110,41 @@ function startTimer () {
 
 
 
-//Question function psuedo code
-  /*function question1() {
-   Goals here: 
-  - change .question to be a new question
-  - create 4 answers 
-  - if else statement that:
-  --- if (click === right answer) {
-    fire question 2 function;
-    create prompt that reads "last question: correct!";
-  } else if (click !== correct) {
-    fire question 2 function;
-    create prompt that reads "last question: correct!";
-    deduct 10 seconds from timer
-  } else if (timer === 0) {
-    Trigger end game 
-    message = timer expired
-  }
 
-}  */
 
-function startQuiz() {
-    startButton.textContent = '' //removes start button
-    startTimer() //starts timer function
-    question1() //triigers question 1
 
-    function question1() {
-        questionEl.textContent = 'I am a test question. Please hit "correct" for the correct answer and "incorrect" for the incorrect answer.'
-        answerList.appendChild(createAnswer('Correct'));
-        answerList.appendChild(createAnswer('Incorrect'));
-        answerList.addEventListener('click', function(event) {
-            var element = event.target
-            if (element.matches("Correct") && timerCount > 0) {
-                answerStatus.textContent = 'You got the last question right!'
-                question2()
-            } else if (element.matches(!"Correct") && timerCount > 0) {
-                timerCount -= 10
-                answerStatus.textContent = 'You got the last question wrong.'
-                question2()
-            } else if (timCount = 0) {
-                alert('you ran out of time :(') //this is a placeholder untill i get the score form up.
-            }
-        })
-    } 
 
-    function question2() {
-        questionEl.textContent = 'You made it to question 2!'
-        answerList.appendChild(createAnswer('Not this again...'));
-        answerList.appendChild(createAnswer('Yippee! What is question 3?'));
-    }
 
-/* COMMENTING OUT ADDITIONAL QUESTIONS FOR NOW TILL I GET THE EVENT LISTENER WORKING ABOVE
-    function question2() {
-        questionEl.textContent = 'You made it to question 2!'
-        answerList.appendChild(createAnswer('Not this again...'));
-        answerList.appendChild(createAnswer('Yippee! What is question 3?'));
-        answerList.addEventListener('click') //THIS IS PROBABLY WRONG, BUT GETTING THIS DOWN NOW TO TRY AND UNDERSTAND WHAT NEEDS TO HAPPEN
-        if ('click' === 'Yippee! What is question 3?' && timerCount > 0) {
-            answerStatus.textContent = 'You got the last question right!'
-            question3()
-         } else if ('click' !== 'Not this again...' && timerCount > 0) {
-             timerCount -= 10
-             answerStatus.textContent = 'You got the last question wrong.'
-             question3()
-         } else {
-            alert('you ran out of time :(') //this is a placeholder untill i get the score form up.
-         }
-    }
 
-    function question3() {
-        questionEl.textContent = 'It is another question!'
-        answerList.appendChild(createAnswer('*sigh*'));
-        answerList.appendChild(createAnswer('This is my jam'));
-        answerList.addEventListener('click')//THIS IS PROBABLY WRONG, BUT GETTING THIS DOWN NOW TO TRY AND UNDERSTAND WHAT NEEDS TO HAPPEN
 
-        if ('click' === 'This is my jam' && timerCount > 0) {
-            answerStatus.textContent = 'You got the last question right!'
-            quizComplete()
-         } else if ('click' !== '*sigh*' && timerCount > 0) {
-             timerCount -= 10
-             answerStatus.textContent = 'You got the last question wrong.'
-             quizComplete()
-         } else {
-            alert('you ran out of time :(') //this is a placeholder untill i get the score form up.
-         }
-    }
 
-    function quizComplete() {
-        questionEl.textContent = 'Thank you for finishing the quiz! If you would like to save your score please type in your name below. You can find your scores by clicking "View Highscores" above.'
 
-        //FORM GOES HERE
-    } */
+
+
+/* None of the code below is working so commenting out to start over 
+//Function that creates answer options
+function createOptions() {
+    var li = document.createElement('li');
+    var linebreak = document.createElement("br");
+    li.textContent = answer;
+    return(li + linebreak);
 }
 
+function startQuiz() {
+    startTimer() //starts timer function
+    quizQs(questionsArray) //quiz questions and answers fire
+}
+
+function quizQs(questionsArray) {
+    questionEl.textContent =''//removed 'welcome' copy
+    startButton.textContent = '' //removes start button
+    for ( var i = 0; i < questionsArray.length; i++ ) {
+    var question = questionsArray[i].question
+    var choices = questionsArray[i].choices
+    var answer = questionsArray[i].answer
+    questionEl.textContent = question
+    answerList.appendChild(createOptions(choices))
+    }
+
+}
+*/
