@@ -43,9 +43,11 @@ Have fun and good luck! </p>
 var timerCount;
 var questionEl = document.querySelector('.question');
 var answerList = document.querySelector('.answers');
-var timerEl = document.querySelector('.timer')
-var startButton = document.querySelector('.start-button')
-var answerStatus = document.querySelector('.answer-notification')
+var timerEl = document.querySelector('.timer');
+var startButton = document.querySelector('.start-button');
+var answerStatus = document.querySelector('.answer-notification');
+var i = 0;
+var score = 0;
 
 //Questions array
 var questionsArray = 
@@ -108,21 +110,26 @@ function startTimer () {
     }, 1000);
 }
 
-//Quiz function that will start whrn start button is clicked
+//Tutor session - what I need help with: 
+//Linking specific outputs to the clicking of specific child elements when they are event listeners.
+//Dynamically inserting the question and answers everytime a new question is triggered.
+
+
+//Quiz function that will start when 'start button' is clicked
 function startQuiz() {
     questionEl.textContent ='' //Removes welcome copy
     startButton.remove() //Removes start button
     startTimer() //Starts timer function
     quizQs(questionsArray) //Causes the quiz questions and answer options to populate
     
-
+    //Function that fires the quiz questions
     function quizQs() {
-        //This sets what the question will be and renders the copy
-        var question = questionsArray[0].question
+        //This sets what the question will be and renders them
+        var question = questionsArray[i].question
         questionEl.textContent = question
 
-        //This sets up the answers
-        var choices = questionsArray[0].choices
+        //This sets what the answer options will be and renders them
+        var choices = questionsArray[i].choices
         for (var options in choices) {
             //Sets up a new li for each of the "options" in the choices section of the questionArray
             let newChoice = document.createElement('li')
@@ -130,73 +137,42 @@ function startQuiz() {
             //Publishes each option as text in the li, gives it a value and appends the child to the ul
             newChoice.textContent = choices[options]
             answerList.appendChild(newChoice)
-            newChoice.setAttribute('value', newChoice)
+            newChoice.setAttribute('value', choices[options])
 
-            //Should trigger the function below to compare the value of the newChoice.
+            //Triggers the compare fuction when an answer is clicked
             newChoice.addEventListener('click', compare)
         }
     }
 
-//LEFT OFF BELOW.  FOR SOME REASON IT JUST RECOGNIZES EVERYTHING AS THE WRONG ANSWER AND IGNORS THE LAST "IF ELSE"
+
+//Function to compare clicked answers + their resolutions
     function compare(event) {
-        var element = event.target
-        if (element.matches('value') === questionsArray[0].answer && timerCount > 0){
-            console.log("you got it right")
-            //The stuff I want it to do if correct
-            ////Transition to next question and answer set
-            ////Add text to "answe-notification" section saying: "You got the last question right!"
-            ////Score++ (need to add in a score variable)
-
-        } else if (element.matches('value') !== questionsArray[0].answer && timerCount > 0) {
-            console.log("you got it wrong")
-            timerCount -= 10
-            //The stuff I want it to do if incorrect
-            ////Transition to next question and answer set
-            ////Add text to "answe-notification" section saying: "You got the last question wrong."
-        } else if (timerCount == 0) {
-            console.log("time expired") //Not working unless something is clicked
-            //The stuff I want it to do if time expires
-            ////Trigger end game screen (still needs to be built)
+        //Scenario that triggers end of quiz //need to change the results here to fire a new function that loads the form. 
+        if (i === questionsArray.length - 1) {
+            if (questionsArray[i].answer == event.target.textContent) {
+                console.log('You did it!');
+                score++;
+            } else if (questionsArray[i].answer != event.target.textContent) {
+                console.log('You got it wrong');
+                timerCount -= 10;
+            }
+            answerList.textContent ='';
+            questionEl.textContent ='';
+            questionEl.textContent = 'You finished the quiz! your final score is: ' + score;
+        } else if (i < questionsArray.length) { 
+            if (questionsArray[i].answer == event.target.textContent) {
+                console.log('You did it!');
+                score++;
+            } else if (questionsArray[i].answer != event.target.textContent) {
+                console.log('You got it wrong');
+                timerCount -= 10;
+            }
+            answerList.textContent =''; //Removes welcome copy
+            i++;
+            quizQs()
         }
+
     }
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/* None of the code below is working so commenting out to start over 
-//Function that creates answer options
-function createOptions() {
-    var li = document.createElement('li');
-    var linebreak = document.createElement("br");
-    li.textContent = answer;
-    return(li + linebreak);
-}
-
-function startQuiz() {
-    startTimer() //starts timer function
-    quizQs(questionsArray) //quiz questions and answers fire
-}
-
-function quizQs(questionsArray) {
-    questionEl.textContent =''//removed 'welcome' copy
-    startButton.textContent = '' //removes start button
-    for ( var i = 0; i < questionsArray.length; i++ ) {
-    var question = questionsArray[i].question
-    var choices = questionsArray[i].choices
-    var answer = questionsArray[i].answer
-    questionEl.textContent = question
-    answerList.appendChild(createOptions(choices))
-    }
-
-}
-*/
