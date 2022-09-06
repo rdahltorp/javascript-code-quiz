@@ -90,6 +90,30 @@ var questionsArray =
     ];
 
 
+
+//Timer function
+function startTimer () {
+    var timeInterval = setInterval(function() {
+        //If timer runs to 0
+        if (timerCount === 0) {
+            clearInterval(timeInterval)
+            console.log ('time expired')
+            endGame()
+            answerStatus.textContent = 'Timer expired';
+            
+        } 
+        //Timer counts down & stops at 0
+        if (timerCount >= 0) {
+            timerEl.textContent = timerCount + ' seconds left';
+            timerCount--;
+        } else {
+        clearInterval(timeInterval)
+        }
+    }, 1000);
+}
+
+//QUIZ PATH
+
 //Opening of the page
 function init() {
     timerCount = 60; 
@@ -98,31 +122,14 @@ function init() {
 }
 init()
 
-//Timer function
-function startTimer () {
-    var timeInterval = setInterval(function() {
-        if (timerCount >= 0) {
-            timerEl.textContent = timerCount + ' seconds left';
-            timerCount--;
-      } else {
-        clearInterval(timeInterval)
-      }
-    }, 1000);
-}
-
-//Tutor session - what I need help with: 
-//Linking specific outputs to the clicking of specific child elements when they are event listeners.
-//Dynamically inserting the question and answers everytime a new question is triggered.
-
-
 //Quiz function that will start when 'start button' is clicked
 function startQuiz() {
     questionEl.textContent ='' //Removes welcome copy
-    startButton.remove() //Removes start button
+    startButton.style.display = 'none' //Removes start button
     startTimer() //Starts timer function
     quizQs(questionsArray) //Causes the quiz questions and answer options to populate
     
-    //Function that fires the quiz questions
+    //Function that fires the quiz questions & answer options
     function quizQs() {
         //This sets what the question will be and renders them
         var question = questionsArray[i].question
@@ -147,27 +154,37 @@ function startQuiz() {
 
 //Function to compare clicked answers + their resolutions
     function compare(event) {
-        //Scenario that triggers end of quiz //need to change the results here to fire a new function that loads the form. 
+        //Scenario that triggers end of quiz //need to change the results here to fire a new function that loads the form. //Need to figure out how to stop the timer here.
         if (i === questionsArray.length - 1) {
             if (questionsArray[i].answer == event.target.textContent) {
-                console.log('You did it!');
                 score++;
+                answerStatus.textContent = 'You got the last question right!'
             } else if (questionsArray[i].answer != event.target.textContent) {
-                console.log('You got it wrong');
                 timerCount -= 10;
+                answerStatus.textContent = 'You got the last question wrong!'
             }
+            //Clears prevous question text and adds a finished message
             answerList.textContent ='';
             questionEl.textContent ='';
-            questionEl.textContent = 'You finished the quiz! your final score is: ' + score;
+            questionEl.textContent = 'You finished the quiz! Click the button below to see your final score and log it so you can see your scores in the highscore page!';
+
+            //Adds back in button and labels it 
+            startButton.style.display = ''
+            startButton.textContent = 'See Score'
+            startButton.addEventListener('click', endGame)
+        
+        //Scenarios that trigger while quiz is active
         } else if (i < questionsArray.length) { 
             if (questionsArray[i].answer == event.target.textContent) {
                 console.log('You did it!');
                 score++;
+                answerStatus.textContent = 'You got the last question right!'
             } else if (questionsArray[i].answer != event.target.textContent) {
                 console.log('You got it wrong');
                 timerCount -= 10;
+                answerStatus.textContent = 'You got the last question wrong!'
             }
-            answerList.textContent =''; //Removes welcome copy
+            answerList.textContent =''; //Removes answer choice copy between questions
             i++;
             quizQs()
         }
@@ -176,3 +193,15 @@ function startQuiz() {
 
 }
 
+//Function that triggers the end of the the quiz and allows for users to log scores
+function endGame() {
+    //Removes all previous copy and replaces it with the new copy and final score.
+    answerList.textContent ='';
+    questionEl.textContent ='';
+    answerStatus.textContent = '';
+    questionEl.textContent = 'Your final score is: ' + score + '/6!';
+
+    //Renders a form for the user to add their initials
+
+    //NEED A FUNCTION THAT LOGS THEIR SCORES IN THE LOCAL STORAGE
+}
