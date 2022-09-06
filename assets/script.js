@@ -49,6 +49,7 @@ var answerStatus = document.querySelector('.answer-notification');
 var i = 0;
 var score = 0;
 
+
 //Questions array
 var questionsArray = 
     [
@@ -102,6 +103,12 @@ function startTimer () {
             answerStatus.textContent = 'Timer expired';
             
         } 
+    
+        //Intended to stop time when end of questions is reached, but it stops time at the last question. Not sure why or how to get it to stop when I finish the questions. 
+        if (i === questionsArray.length - 1 && timerCount > 0) {
+            clearInterval(timeInterval)
+        }
+
         //Timer counts down & stops at 0
         if (timerCount >= 0) {
             timerEl.textContent = timerCount + ' seconds left';
@@ -154,7 +161,7 @@ function startQuiz() {
 
 //Function to compare clicked answers + their resolutions
     function compare(event) {
-        //Scenario that triggers end of quiz //need to change the results here to fire a new function that loads the form. //Need to figure out how to stop the timer here.
+        //Scenario that triggers end of quiz //need to change the results here to fire a new function that loads the form.
         if (i === questionsArray.length - 1) {
             if (questionsArray[i].answer == event.target.textContent) {
                 score++;
