@@ -179,7 +179,7 @@ function startQuiz() {
             startButton.style.display = ''
             startButton.textContent = 'See Score'
             startButton.addEventListener('click', endGame)
-        
+            //i++;
         //Scenarios that trigger while quiz is active
         } else if (i < questionsArray.length) { 
             if (questionsArray[i].answer == event.target.textContent) {
@@ -211,4 +211,8 @@ function endGame() {
     //Renders a form for the user to add their initials
 
     //NEED A FUNCTION THAT LOGS THEIR SCORES IN THE LOCAL STORAGE
+}
+
+function highScoreIntake() {
+    //This is where the form goes that takes their score and name and adds it to local storage. 
 }
