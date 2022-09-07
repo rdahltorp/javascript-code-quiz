@@ -47,7 +47,13 @@ var timerEl = document.querySelector('.timer');
 var startButton = document.querySelector('.start-button');
 var answerStatus = document.querySelector('.answer-notification');
 var i = 0;
+//vars for Highscores
 var score = 0;
+var highScoreBox = document.querySelector('.highscore-box');
+var retakeButton = document.querySelector('.retake');
+var submitHighScore = document.querySelector('#submit');
+var nameInput = document.querySelector('#name');
+var confirmedSub = document.querySelector('#confirmed')
 
 
 //Questions array
@@ -126,6 +132,7 @@ function init() {
     timerCount = 60; 
     timerEl.textContent = timerCount + ' seconds left'
     startButton.addEventListener('click', startQuiz)
+    highScoreBox.style.display = 'none'
 }
 init()
 
@@ -133,6 +140,7 @@ init()
 function startQuiz() {
     questionEl.textContent ='' //Removes welcome copy
     startButton.style.display = 'none' //Removes start button
+    highScoreBox.style.display = 'none'
     startTimer() //Starts timer function
     quizQs(questionsArray) //Causes the quiz questions and answer options to populate
     
@@ -207,12 +215,32 @@ function endGame() {
     questionEl.textContent ='';
     answerStatus.textContent = '';
     questionEl.textContent = 'Your final score is: ' + score + '/6!';
-
+    highScoreIntake()
     //Renders a form for the user to add their initials
 
     //NEED A FUNCTION THAT LOGS THEIR SCORES IN THE LOCAL STORAGE
 }
 
 function highScoreIntake() {
-    //This is where the form goes that takes their score and name and adds it to local storage. 
+    //This is where the form goes that takes their score and name and adds it to local storage.
+    highScoreBox.style.display = '' 
+    //What the form needs: 1) 'Name' label with an open text box. 2) On next line, "Score" with a space next to it showing the score. 3) a submit button that logs the socre to the local storage.
+    //To do this I need to append a child form
+    submitHighScore.addEventListener('click', function(submit) {
+        submit.preventDefault();
+
+        var user = {
+            userName: nameInput.value,
+            userScore: score
+        }
+
+        confirmedSub.textContent = "Your score has been logged!"
+        localStorage.setItem('user', JSON.stringify(user));
+    })
+    
+
+    //Button to retake quiz
+    retakeButton.addEventListener('click', window.location.reload)//Want this to reload the page so the user can take it again. 
+
+
 }

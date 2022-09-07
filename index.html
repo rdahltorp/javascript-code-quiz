@@ -11,7 +11,7 @@
     <header>
         <h1>JavaScript Quiz</h1> <!-- Center this accross the top -->
         <div id="scores-timers">
-            <h3 class="highscores"><a href = #>View Highscores</a></h3> <!-- top left corner -->
+            <h3 class="highscores"><a href = #>Highscores</a></h3> <!-- top left corner -->
             <h3 class="timer"></h3> <!-- top right corner -->
         </div>
     </header>
@@ -28,6 +28,22 @@
         </ul>
         <p class="answer-notification"></p>
     </main>
+    <div class="highscore-box">
+        <p>Be sure to log your score with the form below! <br> You can see your scores at any time by clicking the "Highscores" button above.</p>
+        
+        <div>
+            <form action="index.html" method="post" id="highscore-form">
+                <div class="input-group">
+                    <label for="name">Name: </label>
+                    <input type="text" name="name" id="name" placeholder="Tim" />
+                </div>
+                <button id="submit">Submit</button>
+                <p id="confirmed"></p>
+            </form>
+        </div>
+        <h4 class="retake">Retake Quiz</h4>
+    </div>
     <script src="./assets/script.js"></script>
+
 </body>
 </html>
