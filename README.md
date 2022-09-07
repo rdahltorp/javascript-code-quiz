@@ -11,7 +11,9 @@ While developing this application I learned a lot more about how JavaScript can 
 
 ## Installation
 
-To install, run, and work on the quiz code on your machine, clone down the index.html, style.css, script.js, and README.md files. Then open them in a source code editor.
+To install, run, and work on the quiz code on your machine, clone down the index.html, assets folder (containing style.css & script.js), highscores-page folder (conatining highscores.html & highscores.js) and README.md files. Then open them in a source code editor.
+
+Worth noting that the assets folder contains an images folder, but this is not necissary to run the code as it just contains the demo gif of the quiz. 
 
 
 ## Usage
@@ -20,7 +22,7 @@ The active application will take the user through a series of multiple choice qu
 
 Here is a quick demo of the application in action:
 
-!!INSERT GIF DEMO HERE!!
+![Demo of quiz](/assets/images/code-quiz-demo.gif)
 
 
 You can also find the liver application here: https://rdahltorp.github.io/javascript-code-quiz/
