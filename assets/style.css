@@ -1,4 +1,8 @@
 
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
 /* Heading section */
 header {
     background-color: black;
@@ -36,6 +40,7 @@ main, .highscore-box {
     border: solid 3px blue;
     margin: 20px;
     padding: 10px;
+    border-radius: 10px;
 }
 
 .start-button, .retake, .return {
@@ -45,6 +50,11 @@ main, .highscore-box {
     padding: 20px;
     margin: 10px 200px;
     cursor: pointer;
+    border-radius: 20px;
+}
+
+.start-button:hover, .retake:hover, .return:hover {
+    background-color: rgb(39, 39, 39);
 }
 
 .answer-notification {
@@ -61,6 +71,10 @@ li {
     cursor: pointer;
 } 
 
+.answers li:hover {
+    color: blue
+}
+
 #highscore-form {
     display: flex;
     flex-direction: column;
@@ -74,6 +88,11 @@ li {
     padding: 10px;
     margin: 10px 200px;
     cursor: pointer;
+    border-radius: 15px;
+}
+
+#submit:hover {
+    background-color: rgb(39, 39, 39);
 }
 
 #confirmed {

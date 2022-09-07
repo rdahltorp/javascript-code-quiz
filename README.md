@@ -23,7 +23,7 @@ Here is a quick demo of the application in action:
 !!INSERT GIF DEMO HERE!!
 
 
-You can also find the liver application here: !!!LINK TO LIVE SITE!!!
+You can also find the liver application here: https://rdahltorp.github.io/javascript-code-quiz/
 
 
 ## Features
