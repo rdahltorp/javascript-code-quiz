@@ -25,6 +25,11 @@ h1 {
     display: inline;
 }
 
+a {
+    color: white;
+    text-decoration: none;
+}
+
 /* Main section */
 
 main, .highscore-box {
@@ -33,7 +38,7 @@ main, .highscore-box {
     padding: 10px;
 }
 
-.start-button, .retake {
+.start-button, .retake, .return {
     text-align: center;
     background-color: black;
     color: white;

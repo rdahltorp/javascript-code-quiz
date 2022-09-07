@@ -54,6 +54,7 @@ var retakeButton = document.querySelector('.retake');
 var submitHighScore = document.querySelector('#submit');
 var nameInput = document.querySelector('#name');
 var confirmedSub = document.querySelector('#confirmed')
+var userScores = JSON.parse(localStorage.getItem('user')) || []; //Sets an array of scores and user names when submitted
 
 
 //Questions array
@@ -224,8 +225,8 @@ function endGame() {
 function highScoreIntake() {
     //This is where the form goes that takes their score and name and adds it to local storage.
     highScoreBox.style.display = '' 
-    //What the form needs: 1) 'Name' label with an open text box. 2) On next line, "Score" with a space next to it showing the score. 3) a submit button that logs the socre to the local storage.
-    //To do this I need to append a child form
+
+    //Fuction that submits highscore and user name 
     submitHighScore.addEventListener('click', function(submit) {
         submit.preventDefault();
 
@@ -234,13 +235,22 @@ function highScoreIntake() {
             userScore: score
         }
 
+        userScores.push(user);
+        userScores.sort( (a,b) => b.user - a.user) //Left off here. I think I did it. 
+
         confirmedSub.textContent = "Your score has been logged!"
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify(userScores));
     })
     
 
     //Button to retake quiz
-    retakeButton.addEventListener('click', window.location.reload)//Want this to reload the page so the user can take it again. 
+    retakeButton.addEventListener('click', retake)//Want this to reload the page so the user can take it again. 
 
 
+}
+
+
+function retake() {
+    startQuiz()
+    timerCount = 60
 }
