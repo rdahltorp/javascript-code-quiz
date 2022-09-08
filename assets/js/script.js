@@ -200,5 +200,6 @@ function highScoreIntake() {
 //Function to retake quiz
 function retake() {
     startQuiz()
+    timerEl.style.display = '';
     timerCount = 60
 }

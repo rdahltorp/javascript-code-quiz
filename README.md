@@ -6,7 +6,7 @@ The code for this application is used to run a coding quiz intended to test the 
 
 The code runs off JavaScript for the funcationality and CSS for the style. 
 
-While developing this application I learned a lot more about how JavaScript can influence the HTML in addition to the syntax and different methods you can use to execute unique things in your code (from starting/stopping timers to replacing entire lines of copy).
+While developing this application I learned a lot more about how JavaScript can influence the HTML in addition to the syntax and the different methods you can use to execute unique things in your code (from starting timers to replacing entire lines of copy).
 
 
 ## Installation
@@ -18,7 +18,7 @@ Worth noting that the assets folder contains an images folder, but this is not n
 
 ## Usage
 
-The active application will take the user through a series of multiple choice questions. When the user completed the questions or when time runs out, they will be able to see their score and submit them to keep track of their high scores for later viewing.   
+The active application will take the user through a series of multiple choice questions. When the user completes the questions or when time runs out, they will be able to see their score and submit it to keep track of their high scores for later viewing.   
 
 Here is a quick demo of the application in action:
 
