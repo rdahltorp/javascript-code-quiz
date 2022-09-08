@@ -1,45 +1,4 @@
-/* Psuedo Code
-- User opens the application
-- User is greated wuth a few options/visuals 
----(top left) Link to the highscores page
----(top right) timer with 60 seconds on it - not counting down yet
----(center of screen) opening message reading something like:
-<title> JavaScript Quiz </title> ///Maybe I put this in the center of the header?
-<p>Welcome! This quiz is intened to test your base knowledge of JavaScript. When you press the strat button below, you will be asked a series of questions pretaining to JavaScript.
-As you progress the timer in the top right will begin to count down. Once you make it to the end, you can enter your name/initials to save your highscore. But be careful. 
-Each wrong answer decreases the time by 10 seconds, and if the timer reaches 0 before you are done, it will be game over! 
-Have fun and good luck! </p> 
-<button> START </button>
-
-///WHEN START IS PRESSED
-- WHen the user hits start, the quiz triggers. 
-- The welcome copy gets swapped for the first question, which then has 4 options to choose from. 
-- Once the user clicks one of the options the question swaps to the next and at the bottom of question a line of text triggers saying "incorrect" or "correct". If incorrect the timer decreases by 10 seconds
-- User proceeds to answer all questions
-*/
-
-//Question function psuedo code
-  /*function question1() {
-   Goals here: 
-  - change .question to be a new question
-  - create 4 answers 
-  - if else statement that:
-  --- if (click === right answer) {
-    fire question 2 function;
-    create prompt that reads "last question: correct!";
-  } else if (click !== correct) {
-    fire question 2 function;
-    create prompt that reads "last question: correct!";
-    deduct 10 seconds from timer
-  } else if (timer === 0) {
-    Trigger end game 
-    message = timer expired
-  }
-
-}  */
-
-
-//Global Vars
+//GLOBAL VARS
 var timerCount;
 var questionEl = document.querySelector('.question');
 var answerList = document.querySelector('.answers');
@@ -47,7 +6,8 @@ var timerEl = document.querySelector('.timer');
 var startButton = document.querySelector('.start-button');
 var answerStatus = document.querySelector('.answer-notification');
 var i = 0;
-//vars for Highscores
+
+//Vars for Highscores
 var score = 0;
 var highScoreBox = document.querySelector('.highscore-box');
 var retakeButton = document.querySelector('.retake');
@@ -56,8 +16,7 @@ var nameInput = document.querySelector('#name');
 var confirmedSub = document.querySelector('#confirmed')
 var userScores = JSON.parse(localStorage.getItem('user')) || []; //Sets an array of scores and user names when submitted
 
-
-//Questions array
+//Questions array 
 var questionsArray = 
     [
         {
@@ -97,8 +56,6 @@ var questionsArray =
         },
     ];
 
-
-
 //Timer function
 function startTimer () {
     var timeInterval = setInterval(function() {
@@ -108,13 +65,7 @@ function startTimer () {
             console.log ('time expired')
             endGame()
             answerStatus.textContent = 'Timer expired';
-            
         } 
-    
-        //Intended to stop time when end of questions is reached, but it stops time at the last question. Not sure why or how to get it to stop when I finish the questions. 
-        if (i === questionsArray.length - 1 && timerCount > 0) {
-            clearInterval(timeInterval)
-        }
 
         //Timer counts down & stops at 0
         if (timerCount >= 0) {
@@ -141,7 +92,7 @@ init()
 function startQuiz() {
     questionEl.textContent ='' //Removes welcome copy
     startButton.style.display = 'none' //Removes start button
-    highScoreBox.style.display = 'none'
+    highScoreBox.style.display = 'none' //Hides highscore form box
     startTimer() //Starts timer function
     quizQs(questionsArray) //Causes the quiz questions and answer options to populate
     
@@ -167,10 +118,9 @@ function startQuiz() {
         }
     }
 
-
 //Function to compare clicked answers + their resolutions
     function compare(event) {
-        //Scenario that triggers end of quiz //need to change the results here to fire a new function that loads the form.
+        //Scenario that triggers end of quiz
         if (i === questionsArray.length - 1) {
             if (questionsArray[i].answer == event.target.textContent) {
                 score++;
@@ -179,16 +129,18 @@ function startQuiz() {
                 timerCount -= 10;
                 answerStatus.textContent = 'You got the last question wrong!'
             }
-            //Clears prevous question text and adds a finished message
+            //Clears prevous question text, removes timer and adds a finished message
+            timerEl.remove();
+            timerCount=''
             answerList.textContent ='';
             questionEl.textContent ='';
             questionEl.textContent = 'You finished the quiz! Click the button below to see your final score and log it so you can see your scores in the highscore page!';
 
-            //Adds back in button and labels it 
+            //Adds back in button and labels it for seeing final score
             startButton.style.display = ''
             startButton.textContent = 'See Score'
             startButton.addEventListener('click', endGame)
-            //i++;
+
         //Scenarios that trigger while quiz is active
         } else if (i < questionsArray.length) { 
             if (questionsArray[i].answer == event.target.textContent) {
@@ -217,13 +169,11 @@ function endGame() {
     answerStatus.textContent = '';
     questionEl.textContent = 'Your final score is: ' + score + '/6!';
     highScoreIntake()
-    //Renders a form for the user to add their initials
 
-    //NEED A FUNCTION THAT LOGS THEIR SCORES IN THE LOCAL STORAGE
 }
 
+//Renders a form for the user to add their initials
 function highScoreIntake() {
-    //This is where the form goes that takes their score and name and adds it to local storage.
     highScoreBox.style.display = '' 
 
     //Fuction that submits highscore and user name 
@@ -236,7 +186,7 @@ function highScoreIntake() {
         }
 
         userScores.push(user);
-        userScores.sort( (a,b) => b.user - a.user) //Left off here. I think I did it. 
+        userScores.sort( (a,b) => b.user - a.user)
 
         confirmedSub.textContent = "Your score has been logged!"
         localStorage.setItem('user', JSON.stringify(userScores));
@@ -245,11 +195,9 @@ function highScoreIntake() {
 
     //Button to retake quiz
     retakeButton.addEventListener('click', retake)//Want this to reload the page so the user can take it again. 
-
-
 }
 
-
+//Function to retake quiz
 function retake() {
     startQuiz()
     timerCount = 60

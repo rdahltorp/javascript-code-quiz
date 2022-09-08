@@ -1,8 +1,9 @@
 //Global vars
-var pastScoreList = document.querySelector('.past-scores'); //ul that the past scores will populate into
+var pastScoreList = document.querySelector('.past-scores'); 
 var storedScores = JSON.parse(localStorage.getItem('user')) || [];
 var returnBtn = document.querySelector('.return')
 
+//Function that renders scores stored in the local storage
 function renderScores() {
     for (var i = 0; i < storedScores.length; i++) {
         var score = storedScores[i].userScore;
