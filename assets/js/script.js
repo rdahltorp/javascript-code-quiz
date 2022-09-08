@@ -130,8 +130,8 @@ function startQuiz() {
                 answerStatus.textContent = 'You got the last question wrong!'
             }
             //Clears prevous question text, removes timer and adds a finished message
-            timerEl.remove();
-            timerCount=''
+            timerEl.style.display = 'none';
+            timerCount='';
             answerList.textContent ='';
             questionEl.textContent ='';
             questionEl.textContent = 'You finished the quiz! Click the button below to see your final score and log it so you can see your scores in the highscore page!';
