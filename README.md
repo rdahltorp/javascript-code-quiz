@@ -25,7 +25,7 @@ Here is a quick demo of the application in action:
 ![Demo of quiz](/assets/images/code-quiz-demo.gif)
 
 
-You can also find the liver application here: https://rdahltorp.github.io/javascript-code-quiz/
+You can also find the live application here: https://rdahltorp.github.io/javascript-code-quiz/
 
 
 ## Features
